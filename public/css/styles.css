@@ -1,7 +1,14 @@
+body{
+    background-color: #FFFBF5;
+}
+p.navbar-brand{
+    color: "black";
+}
 .container-fluid {
     padding-top: 70px;
     padding-bottom: 70px;
 }
+
 .navbar {
     padding-top: 15px;
     padding-bottom: 15px;
@@ -10,22 +17,31 @@
     margin-bottom: 0;
     font-size: 12px;
     letter-spacing: 5px;
+    /* background: #AAD7D9; */
 }
 .navbar-nav  li a:hover {
-    color: #1abc9c !important;
+    color: #bc1a1a ;
+    background-color: #FA7070;
+}
+#mytopnav{
+    color: white;
+    
 }
 
 .footer-padding {
 	padding-bottom: 60px;
+
 }
 
 .footer {
-	position: absolute;
+   
+    
+
 	text-align: center;
-	bottom: 0;
 	width: 100%;
 	height: 60px;
 	background-color: #1abc9c;
+    display: block;
 }
 
 .footer p {
@@ -38,4 +54,10 @@
 }
 .useri2{
     width: 100%;
+}
+img{
+    position: relative;
+    left: 15%;
+    width:70%;
+    
 }
