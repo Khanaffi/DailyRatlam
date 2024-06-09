@@ -37,7 +37,7 @@ const Post = mongoose.model('post', postschema);
 
 // const postone=new Post({title:"hiii",body:"this is the test post",Imgtext:"https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg"})
 // postone.save();
-const homeStartingContent = "HEY Buddy ,Welcome to my Page here you got all information About Ratlam , So Keep Visiting and Keep Reading ThankYou ❤️ ";
+const homeStartingContent = "HEY Buddy ,Welcome to my blog website here you got all information About Ratlam , So Keep Visiting and Keep Reading ThankYou ❤️ ";
 const aboutContent = "https://khanaffi.github.io/mysite/"
 const contactContent = "Dailyratlam0@gmail.com"
 const welcom = [title = "hello "]
@@ -49,6 +49,8 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+let urlsitemap=[]
 
 
 async function weather() {
@@ -74,11 +76,10 @@ async function renderdata() {
     if (postdata !== null) {
       if(thedata.length==0){
       postdata.forEach((d) => {
-      
-
           thedata.push(d);
         
       });}
+// console.log(urls);
       return thedata
 
     }
@@ -88,7 +89,7 @@ async function renderdata() {
     let posts = [];
 
     let foundObject = thedata.find(item => item.title === reqdata);
-    console.log(foundObject);
+    // console.log(foundObject);
  
     // console.log(posts);
     return foundObject
@@ -104,7 +105,7 @@ async function renderdata() {
     // function(err,posts){
     const content = await renderdata();
     
-    console.log(content);
+    // console.log(content);
     res.render("home", {
       mosam:mosam,
       titles: 'Home Page',
@@ -167,7 +168,7 @@ async function renderdata() {
     let reqdata = req.params.testings;
     // console.log(render);
     const render = await postupdate(reqdata);
-    let str=render.title
+    let str=render.title;
     let arr =str.split("-").join(" ");
     try{
       res.render("post", {
@@ -211,9 +212,18 @@ async function renderdata() {
     });
   });
 
-  app.get("/sitemap", (req, res) => {
+  app.get("/sitemap.xml", async(req, res) => {
+    res.header('Content-Type', 'application/xml');
 
-    res.sendFile('sitemap.xml', { root: '.' });
+    try {
+      const content = await renderdata();
+      res.render('sitemap', { urls:content });
+      console.log(thedata);
+      
+    } catch (error) {
+      console.log(error);
+    }
+  
   })
 
 
