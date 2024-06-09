@@ -16,7 +16,10 @@ p.navbar-brand{
    margin-left: 0;
    flex-direction: column;
 }
-
+div.container{
+    margin-left: 0;
+    padding-left: 0;
+}
 .navbar {
     padding-top: 15px;
     padding-bottom: 15px;
@@ -41,7 +44,7 @@ p.navbar-brand{
 	padding-bottom: 60px;
 
 }
-img{
+.blogimg{
     width: 60%;
 }
 .footer {
@@ -169,6 +172,13 @@ img{
       margin: 1rem 0;
       text-align: center;
     }
+	   .container{
+    display: flex;
+   gap: 10px;
+   width: 100%;
+   margin-left: 0;
+   flex-direction: column;
+}
   
     .menu-toggle {
       display: flex;
