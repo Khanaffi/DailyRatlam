@@ -16,10 +16,10 @@ p.navbar-brand{
    margin-left: 0;
    flex-direction: column;
 }
-div.container{
+/* div.container{
     margin-left: 0;
     padding-left: 0;
-}
+} */
 .navbar {
     padding-top: 15px;
     padding-bottom: 15px;
@@ -67,7 +67,7 @@ div.container{
 .useri2{
     width: 100%;
 }
-.postimage{
+.postimg{
     position: relative;
     left: 15%;
     width:70%;
