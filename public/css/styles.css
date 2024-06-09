@@ -6,8 +6,8 @@ body{
     font-family: Arial, sans-serif;
 }
 p.navbar-brand{
-    color: "black";
-    font-size: 14px;
+ color: "black";
+    color: black;
 }
 .container{
     display: flex;
