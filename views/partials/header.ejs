@@ -7,18 +7,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color"  content="#4285f4">
 
-  <title>Daily Ratlam | Ratlam Shops,Places,Foods,Showrooms,Cafe</title>
-  <meta name="description" content="Ratlam all news, shops ,cafe ,Food, in this website you can find all things about Ratlam.a daily news about Ratlam ,best food shops in ratlam ,best cafe in ratlam ,best places in ratlam ,best coching centers in ratlam.  ">
- <link rel="icon" href="./favicon.ico" type="image" >
+
+  <meta name="robots" content="index, follow">
+  <title><%= titles %> - Dailyratlam</title>
+  <meta name="description" content="<%= description %>">
+  <meta name="keywords" content="<%= keywords %>">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="icon" href="/favicon_io/favicon.ico" type="image" >
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="canonical" href="<%= canonicalUrl %>">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/styles.css">
 
-  <nav class="navbar navbar-default">
-    <div class="container">
+  <nav class="navbar ">
+    <div class="">
+      
       <div class="navbar-header">
         <p class="navbar-brand">DAILY RATLAM</p>
+      <div class="menu-toggle" id="menu-toggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
       </div>
-        <ul id="myTopnav"class="nav navbar-nav navbar-right">
+      </div>
+      <div id="myTopnav">
+       
+        <ul class="nav navbar-nav navbar-right nav-links"   id="nav-links">
           <!-- 6 -->
           <li id="home"><a href="/"> HOME</a></li>
           <li id="about"><a href="/about">ABOUT US</a></li>
@@ -27,8 +43,10 @@
          
 
         </ul>
+      </div>
+      
     </div>
   </nav>
 
   <body>
-    <div class="container">
+    

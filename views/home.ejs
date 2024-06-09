@@ -1,19 +1,38 @@
 <%- include("partials/header") -%>
 <!-- <h1>Home</h1> -->
-<div>
-    <p><%= inner %></p>
+<div >
+    <!-- <p><%= inner %></p> -->
     <hr>
-    <h2> Article Section </h2>
-    <ul>
+    <h2> Article Section </h2></div>
+    
+<div class="container">
+    
     <% newpost.forEach(function(data){ %>
-
-      <li> <h1> <%= data.title %></h1>
+<div class="items">
+  <ul>
+      <li> <h2> <%= data.title %></h2>
         <p><%=data.body.substring(0,100) +" ..." %> <a href="/posts/<%=data.title %>">Read more</a></p>
-
-    </li> 
+      
+      </li> 
+    </ul>
+  </div>
     <% }); %>
-</ul>
 </div>
+<div id="rightside">
+  <h3> Weather Report</h3>
+  <% if (mosam) { %>
+    <div class="mosam">
+      <h2><%= mosam.city %></h2>
+  <h3>Temperature : <%= mosam.temperature %>°C</h3>
+  <h3>Description : <%= mosam.description %> <img src="http://openweathermap.org/img/wn/<%= mosam.icon %>.png" alt="<%= description %>" ></h3>
+  </div> 
+  
+  <% } else { %>
+    <p>Could not fetch weather data. Please try again later.</p>
+<% } %>
+
+</div>
+
     
 
 <%- include("partials/footer") -%>
