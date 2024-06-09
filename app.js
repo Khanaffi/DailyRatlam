@@ -221,9 +221,30 @@ async function renderdata() {
 
     try {
       const content = await renderdata();
-      const date = new Date().toLocaleString("en-CA",{year:'numeric',month:"2-digit",day:'2-digit',hour:'2-digit',minute:'2-digit', second:'2-digit'});
-      const d=date.split(',').join("T").split(" ").join("");
-      res.render('sitemap', { urls:content ,date:d});
+      // const date = new Date().toLocaleString("en-CA",{year:'numeric',month:"2-digit",day:'2-digit',hour:'2-digit',minute:'2-digit', second:'2-digit'});
+      // const d=date.split(',').join("T").split(" ").join("");
+// Get the current date in the required format
+function getCurrentDate() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  const timezoneOffset = -now.getTimezoneOffset();
+  const timezoneOffsetHours = String(Math.abs(timezoneOffset / 60)).padStart(2, '0');
+  const timezoneOffsetMinutes = String(Math.abs(timezoneOffset % 60)).padStart(2, '0');
+  const timezone = (timezoneOffset >= 0 ? '+' : '-') + timezoneOffsetHours + ':' + timezoneOffsetMinutes;
+
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
+}
+
+const lastmod = getCurrentDate(); // Get the current date in the required format
+console.log(lastmod);
+
+
+      res.render('sitemap', { urls:content ,date:lastmod});
       // console.log(thedata);
       
     } catch (error) {
