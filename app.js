@@ -165,6 +165,8 @@ async function renderdata() {
     });
   })
   app.get("/posts/:testings", async function (req, res) {
+    const content = await renderdata();
+
     let reqdata = req.params.testings;
     // console.log(render);
     const render = await postupdate(reqdata);
@@ -172,6 +174,7 @@ async function renderdata() {
     let arr =str.split("-").join(" ");
     try{
       res.render("post", {
+        date:render.updated,
         titles: arr, 
         description: render.body,
         keywords: render.keywords,
@@ -214,17 +217,20 @@ async function renderdata() {
 
   app.get("/sitemap.xml", async(req, res) => {
     res.header('Content-Type', 'application/xml');
+    
 
     try {
       const content = await renderdata();
-      res.render('sitemap', { urls:content });
-      console.log(thedata);
+      const date = new Date().toLocaleString("en-CA",{year:'numeric',month:"2-digit",day:'2-digit',hour:'2-digit',minute:'2-digit', second:'2-digit'});
+      const d=date.split(',').join("T").split(" ").join("");
+      res.render('sitemap', { urls:content ,date:d});
+      // console.log(thedata);
       
     } catch (error) {
       console.log(error);
     }
   
-  })
+  });
 
 
 
