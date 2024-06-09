@@ -3,14 +3,14 @@
 <div >
     <!-- <p><%= inner %></p> -->
     <hr>
-    <h2> Article Section </h2></div>
+    <h2> Article's Section </h2></div>
     
 <div class="container">
     
     <% newpost.forEach(function(data){ %>
 <div class="items">
   <ul>
-      <li> <h2> <%= data.title %></h2>
+      <li> <h1> <%= data.title %></h1>
         <p><%=data.body.substring(0,100) +" ..." %> <a href="/posts/<%=data.title %>">Read more</a></p>
       
       </li> 

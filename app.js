@@ -31,7 +31,7 @@ mongoose.connect(process.env.URL, { useNewUrlParser: true }).then(() => {
 
 // use `await mongoose.connect('mongodb://user:password@localhost:27017/test');` if your database has auth enabled
 
-const postschema = new mongoose.Schema({ title: String, body: String, Imgtext: String, Head2: String, Imgtext2: String, body2: String, updated: { type: Date, default: Date.now }, });
+const postschema = new mongoose.Schema({ title: String, body: String, Imgtext: String, Head2: String, keywords:String, Imgtext2: String, body2: String, updated: { type: Date, default: Date.now }, });
 
 const Post = mongoose.model('post', postschema);
 
@@ -103,12 +103,12 @@ async function renderdata() {
     const mosam= await weather();
     // function(err,posts){
     const content = await renderdata();
-    // console.log(content);
+    console.log(content);
     res.render("home", {
       mosam:mosam,
       titles: 'Home Page',
       description: "Ratlam all news, shops ,cafe ,Food, in this website you can find all things about Ratlam.a daily news about Ratlam ,best food shops in ratlam ,best cafe in ratlam ,best places in ratlam ,best coching centers in ratlam.  ",
-      keywords: 'Daily Ratlam NEWS| Ratlam Shops,ratlam Places,ratlam Foods,ratlam Showrooms,ratlam Cafe',
+      keywords: "Ratlam news | ratlam best food | ratlam best places | best shops in ratlam | gold shops in ratlam | ratlam oyo rooms | jamad patli | Dargah in ratlam | ratlam best cafe | ratlam call service |",
       inner: homeStartingContent, newpost: content,
      
       canonicalUrl: 'https://dailyratlam.in/'
@@ -130,7 +130,10 @@ async function renderdata() {
   app.get("/about", function (req, res) {
     // res.render("about",{innerab:aboutContent});
     // res.sendFile(__dirname + '/about.html');
-    res.redirect("https://khanaffi.github.io/mysite/")
+    res.render('about.ejs',{ titles: 'About page - daily ratlam',
+      description: "Ratlam all news, shops ,cafe ,Food, in this website you can find all things about Ratlam.a daily news about Ratlam ,best food shops in ratlam ,best cafe in ratlam ,best places in ratlam ,best coching centers in ratlam.  ",
+      keywords: 'Ratlam news | ratlam best food | ratlam best places | best shops in ratlam | gold shops in ratlam | ratlam oyo rooms | jamad patli | Dargah in ratlam | ratlam best cafe | ratlam call service |',
+      canonicalUrl: 'https://dailyratlam.in/contact'});
   })
   app.get("/compose", function (req, res) {
     res.render("compose", {
@@ -147,7 +150,8 @@ async function renderdata() {
       Imgtext: req.body.imgtext,
       Head2: req.body.usertext2,
       Imgtext2: req.body.imgtext2,
-      body2: req.body.postbody2
+      body2: req.body.postbody2,
+      keywords:req.body.keywords
     });
     thedata.push(post);
     post.save(function (err) {
@@ -162,14 +166,11 @@ async function renderdata() {
     let reqdata = req.params.testings;
     // console.log(render);
     const render = await postupdate(reqdata);
-    
-    // console.log(render);
-    
     try{
       res.render("post", {
         titles: render.title, 
         description: render.body,
-        keywords: 'Daily Ratlam NEWS||ratlami blogger Ratlam Shops,ratlam Places,ratlam Foods,ratlam Showrooms,ratlam Cafe',
+        keywords: render.keywords,
         canonicalUrl: `https://dailyratlam.in/posts/${reqdata}`,
         title: render.title,
         content: render.body,
@@ -202,7 +203,7 @@ async function renderdata() {
       innerct: contactContent,
       titles: 'blogs page - daily ratlam',
       description: "Ratlam all news, shops ,cafe ,Food, in this website you can find all things about Ratlam.a daily news about Ratlam ,best food shops in ratlam ,best cafe in ratlam ,best places in ratlam ,best coching centers in ratlam.  ",
-      keywords: 'Daily Ratlam NEWS| ratlami blogger | Ratlam Shops,ratlam Places,ratlam Foods,ratlam Showrooms,ratlam Cafe',
+      keywords: 'blogs of ratlam | ratlam web devlopment course | Mern stack in ratlam | ratlam coaching classes |Daily Ratlam NEWS| ratlami blogger | Ratlam Shops,ratlam Places,ratlam Foods,ratlam Showrooms,ratlam Cafe | ratlam blogs website',
       canonicalUrl: 'https://dailyratlam.in/blog'
     });
   });
