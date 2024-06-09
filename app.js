@@ -103,6 +103,7 @@ async function renderdata() {
     const mosam= await weather();
     // function(err,posts){
     const content = await renderdata();
+    
     console.log(content);
     res.render("home", {
       mosam:mosam,
@@ -166,13 +167,15 @@ async function renderdata() {
     let reqdata = req.params.testings;
     // console.log(render);
     const render = await postupdate(reqdata);
+    let str=render.title
+    let arr =str.split("-").join(" ");
     try{
       res.render("post", {
-        titles: render.title, 
+        titles: arr, 
         description: render.body,
         keywords: render.keywords,
         canonicalUrl: `https://dailyratlam.in/posts/${reqdata}`,
-        title: render.title,
+        title: arr,
         content: render.body,
         Imgtext: render.Imgtext,
         Head2: render.Head2,
