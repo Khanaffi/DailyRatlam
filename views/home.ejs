@@ -10,7 +10,8 @@
     
     <% newpost.forEach(function(data){ %>
 <div class="items">
-  <ul>
+
+  <ul><hr>
       <li> <h1> <%= data.title.split("-").join(" ") %></h1>
         <p><%=data.body.substring(0,100) +" ..." %> <a href="/posts/<%=data.title %>">Read more</a></p>
         <label> <%= data.updated.toString().substring(0,15) %></label>
