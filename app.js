@@ -195,7 +195,7 @@ async function renderdata() {
   });
 
   app.get("/post ",(req,res)=>{
-    res.redirect("/");
+    res.redirect("/blog");
 
   });
 

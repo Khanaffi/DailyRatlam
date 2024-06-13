@@ -1,0 +1,21 @@
+# General setting for all bots
+User-agent: *
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /scripts/
+Disallow: /private/
+Disallow: /hidden-page.html
+Disallow: /secret/
+
+# Allow Googlebot to crawl everything
+User-agent: Googlebot
+Allow: /
+
+# Block specific bot
+User-agent: BadBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://www.dailyratlam.in/sitemap.xml
+HomePage: https://www.dailyratlam.in/
+Posts: https://www.dailyratlam.in/posts/
