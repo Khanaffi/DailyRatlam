@@ -39,6 +39,11 @@ div.container{
   
     
 }
+.Homeimg{
+  width: 100px;
+  float: left;
+  margin-right: 20px;
+}
 
 .footer-padding {
 	padding-bottom: 60px;

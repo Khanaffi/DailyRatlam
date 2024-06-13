@@ -109,8 +109,8 @@ async function renderdata() {
     res.render("home", {
       mosam:mosam,
       titles: 'Home Page',
-      description: "Ratlam all news, shops ,cafe ,Food, in this website you can find all things about Ratlam.a daily news about Ratlam ,best food shops in ratlam ,best cafe in ratlam ,best places in ratlam ,best coching centers in ratlam.  ",
-      keywords: "Ratlam news | ratlam best food | ratlam best places | best shops in ratlam | gold shops in ratlam | ratlam oyo rooms | jamad patli | Dargah in ratlam | ratlam best cafe | ratlam call service |",
+      description: " dailyratlam home page Ratlam all news, shops ,cafe ,Food, in this website you can find all things about Ratlam.a daily news about Ratlam ,best food shops in ratlam ,best cafe in ratlam ,best places in ratlam ,best coching centers in ratlam.  ",
+      keywords: "dailyratlam Ratlam news | ratlam best food | ratlam best places | best shops in ratlam | gold shops in ratlam | ratlam oyo rooms | jamad patli | Dargah in ratlam | ratlam best cafe | ratlam call service |",
       inner: homeStartingContent, newpost: content,
      
       canonicalUrl: 'https://dailyratlam.in/'
@@ -165,14 +165,16 @@ async function renderdata() {
     });
   })
   app.get("/posts/:testings", async function (req, res) {
-    const content = await renderdata();
 
-    let reqdata = req.params.testings;
-    // console.log(render);
-    const render = await postupdate(reqdata);
-    let str=render.title;
-    let arr =str.split("-").join(" ");
     try{
+      const content = await renderdata();
+
+      let reqdata = req.params.testings;
+      // console.log(render);
+      const render = await postupdate(reqdata);
+      let str=render.title;
+      let arr =str.split("-").join(" ");
+
       res.render("post", {
         date:render.updated,
         titles: arr, 
@@ -192,6 +194,10 @@ async function renderdata() {
     }
   });
 
+  app.get("/post ",(req,res)=>{
+    res.redirect("/");
+
+  });
 
 
 
@@ -200,7 +206,7 @@ async function renderdata() {
     res.render("contact", {
       innerct: contactContent,
       titles: 'Contact page - daily ratlam',
-      description: "Ratlam all news, shops ,cafe ,Food, in this website you can find all things about Ratlam.a daily news about Ratlam ,best food shops in ratlam ,best cafe in ratlam ,best places in ratlam ,best coching centers in ratlam.  ",
+      description: " daily Ratlam all news, shops ,cafe ,Food, in this website you can find all things about Ratlam.a daily news about Ratlam ,best food shops in ratlam ,best cafe in ratlam ,best places in ratlam ,best coching centers in ratlam.  ",
       keywords: 'Daily Ratlam NEWS||ratlami blogger | Ratlam Shops,ratlam Places,ratlam Foods,ratlam Showrooms,ratlam Cafe',
       canonicalUrl: 'https://dailyratlam.in/contact'
     });
@@ -209,7 +215,7 @@ async function renderdata() {
     res.render("blog", {
       innerct: contactContent,
       titles: 'blogs page - daily ratlam',
-      description: "Ratlam all news, shops ,cafe ,Food, in this website you can find all things about Ratlam.a daily news about Ratlam ,best food shops in ratlam ,best cafe in ratlam ,best places in ratlam ,best coching centers in ratlam.  ",
+      description: " Dailyratlam blogs | daily Ratlam all news, shops ,cafe ,Food, in this website you can find all things about Ratlam.a daily news about Ratlam ,best food shops in ratlam ,best cafe in ratlam ,best places in ratlam ,best coching centers in ratlam.  ",
       keywords: 'blogs of ratlam | ratlam web devlopment course | Mern stack in ratlam | ratlam coaching classes |Daily Ratlam NEWS| ratlami blogger | Ratlam Shops,ratlam Places,ratlam Foods,ratlam Showrooms,ratlam Cafe | ratlam blogs website',
       canonicalUrl: 'https://dailyratlam.in/blog'
     });

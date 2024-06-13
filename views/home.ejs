@@ -11,8 +11,10 @@
     <% newpost.forEach(function(data){ %>
 <div class="items">
 
-  <ul><hr>
-      <li> <h1> <%= data.title.split("-").join(" ") %></h1>
+  <ul>
+      <li><a href="/posts/<%=data.title %>"><h1> <%= data.title.split("-").join(" ") %></h1></a>
+        <img class="Homeimg" src="<%=data.Imgtext %>" alt="<%= data.title %>"/> 
+
         <p><%=data.body.substring(0,100) +" ..." %> <a href="/posts/<%=data.title %>">Read more</a></p>
         <label> <%= data.updated.toString().substring(0,15) %></label>
       
