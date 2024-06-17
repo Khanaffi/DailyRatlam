@@ -39,7 +39,7 @@ keepAlive();
 let port = process.env.PORT;
 const apiKey = process.env.API;
 
-const thedata = [];
+let thedata = [];
 
 
 
