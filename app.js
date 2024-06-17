@@ -96,6 +96,7 @@ async function weather() {
 
 
 async function renderdata() {
+  thedata=[]
     const postdata = await Post.find({}).sort({ updated: -1 });
     if (postdata !== null) {
       if(thedata.length==0){
