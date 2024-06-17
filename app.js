@@ -184,6 +184,7 @@ app.get("/ping",(req,res)=>{
     thedata.push(post);
     post.save(function (err) {
       if (!err) {
+        thedata=[]
 
         res.redirect("/");
 
