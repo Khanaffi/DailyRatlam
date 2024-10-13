@@ -3,14 +3,18 @@
 <h1><%= title %></h1>
 <label><%= date.toString().substring(0,15) %></label>
 <hr>
+<h3 class="link" >DownloadLink <a href="<%= L1 %>">click here</a> </h3>
 <img class="postimg" src="<%=Imgtext %>" alt="<%= title %>"/> 
 <hr>
-<p><%= content %></p>
+<%- content %>
+<h3 class="link" >DownloadLink <a href="<%= L1 %>" style="text-decoration: none;">click here</a> </h3>
 <hr>
 <h2><%= Head2 %></h2>
 <hr>
+<h3 class="link">DownloadLink <a href="<%= L2 %>">click here</a> </h3>
+
 <img class="postimg" src="<%= Imgtext2 %>" />
 <hr>
-<P><%= body2 %></P>
+<P><%-body2 %></P>
 <hr>
 <%- include("partials/footer") -%>

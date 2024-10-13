@@ -3,7 +3,7 @@ require('dotenv').config();
 const path = require('path');
 const cron=require('node-cron');
 const fetch=require('node-fetch');
-
+const Razorpay = require('razorpay');
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -11,6 +11,7 @@ const _ = require('lodash');
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const axios = require('axios');
+const { title } = require('process');
 
 const app = express();
 async function keepAlive() {
@@ -55,7 +56,7 @@ mongoose.connect(process.env.URL, { useNewUrlParser: true }).then(() => {
 
 // use `await mongoose.connect('mongodb://user:password@localhost:27017/test');` if your database has auth enabled
 
-const postschema = new mongoose.Schema({ title: String, body: String, Imgtext: String, Head2: String, keywords:String, Imgtext2: String, body2: String, updated: { type: Date, default: Date.now }, });
+const postschema = new mongoose.Schema({ title: String, body: String, Imgtext: String, Head2: String, keywords:String,L1:String,L2:String, Imgtext2: String, body2: String, updated: { type: Date, default: Date.now }, });
 
 const Post = mongoose.model('post', postschema);
 
@@ -64,7 +65,7 @@ const Post = mongoose.model('post', postschema);
 const homeStartingContent = "HEY Buddy ,Welcome to my blog website here you got all information About Ratlam , So Keep Visiting and Keep Reading ThankYou ❤️ ";
 const aboutContent = "https://khanaffi.github.io/mysite/"
 const contactContent = "Dailyratlam0@gmail.com"
-const welcom = [title = "hello "]
+
 const lat = 23.3315; // You can change the city or make it dynamic based on user input
 const lon =75.0367;
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
@@ -180,7 +181,9 @@ app.get("/ping",(req,res)=>{
       Head2: req.body.usertext2,
       Imgtext2: req.body.imgtext2,
       body2: req.body.postbody2,
-      keywords:req.body.keywords
+      keywords:req.body.keywords,
+      L1:req.body.l1,
+      L2:req.body.l2
     });
     thedata.push(post);
     post.save(function (err) {
@@ -214,7 +217,9 @@ app.get("/ping",(req,res)=>{
         Imgtext: render.Imgtext,
         Head2: render.Head2,
         Imgtext2: render.Imgtext2,
-        body2: render.body2
+        body2: render.body2,
+        L1:render.L1,
+        L2:render.L2
       });
     }
     catch(error) {
@@ -287,8 +292,136 @@ console.log(lastmod);
   
   });
 
+  
+
+const razorpayInstance = new Razorpay({
+  key_id: process.env.RP_LIVE_KEY,
+  key_secret: process.env.RP_SECRET_KEY
+});
+
+app.get('/payment/:num', async (req, res) => {
+        const num=req.params.num
+        const content = await renderdata();
+    const foundObject = content.find(item => item.L1 === `/payment/${num}`);
+   
 
 
+        
+  const amount = 29999; // Example amount in paise (₹500)
+  const key_id = process.env.RP_LIVE_KEY; // Replace with your actual Razorpay key ID
+  
+
+  res.render('payments.ejs', { key_id, amount ,num,t1:foundObject.title,b1:foundObject.body}); // Pass key_id and amount to the EJS template
+});
+app.post('/create-order', async (req, res) => {
+  const options = {
+    amount: 29999, // Amount in smallest currency unit
+    currency: 'INR',
+    receipt: 'receipt#1',
+    payment_capture: 1 // Auto capture
+  };
+
+  try {
+    const response = await razorpayInstance.orders.create(options); // Change this line
+    res.json(response); // Send the response back to the client
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Some error occurred");
+  }
+});
+
+
+         
+
+ 
+
+app.get('/payment/success/:test', (req, res) => {
+  // Verify the payment here, using Razorpay's verification process.
+       const test=           req.params.test;
+       console.log(test);
+       
+  
+  // If payment is verified
+  switch (test) {
+    case test===1:
+      const pdfName = 'pdfs.rar'; // Change this to the relevant PDF name based on your logic.
+      const pdfPath = path.join(__dirname, 'pdfs', pdfName);
+    
+      // Set headers for the PDF file
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', `attachment; filename="${pdfName}"`);
+      res.sendFile(pdfPath, (err) => {
+        if (err) {
+            console.error('Error sending file:', err);
+            res.status(500).send('Error sending file.');
+        }
+    });
+      break;
+      case test===2:
+      const pdfName2 = 'pdfs.rar'; // Change this to the relevant PDF name based on your logic.
+      const pdfPath2 = path.join(__dirname, 'pdfs', pdfName2);
+    
+      // Set headers for the PDF file
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', `attachment; filename="${pdfName2}"`);
+      res.sendFile(pdfPath2, (err) => {
+        if (err) {
+            console.error('Error sending file:', err);
+            res.status(500).send('Error sending file.');
+        }
+    });
+      break;
+      case test===3:
+        const pdfName3 = 'pdfs.rar'; // Change this to the relevant PDF name based on your logic.
+        const pdfPath3 = path.join(__dirname, 'pdfs', pdfName3);
+      
+        // Set headers for the PDF file
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', `attachment; filename="${pdfName3}"`);
+        res.sendFile(pdfPath3, (err) => {
+          if (err) {
+              console.error('Error sending file:', err);
+              res.status(500).send('Error sending file.');
+          }
+      });
+        break;
+        case test===4:
+          const pdfName4 = 'pdfs.rar'; // Change this to the relevant PDF name based on your logic.
+          const pdfPath4 = path.join(__dirname, 'pdfs', pdfName4);
+        
+          // Set headers for the PDF file
+          res.setHeader('Content-Type', 'application/pdf');
+          res.setHeader('Content-Disposition', `attachment; filename="${pdfName4}"`);
+          res.sendFile(pdfPath4, (err) => {
+            if (err) {
+                console.error('Error sending file:', err);
+                res.status(500).send('Error sending file.');
+            }
+        });
+          break;
+  
+    default:
+      case test===5:
+        const pdfName5 = 'pdfs.rar'; // Change this to the relevant PDF name based on your logic.
+        const pdfPath5 = path.join(__dirname, 'pdfs', pdfName5);
+      
+        // Set headers for the PDF file
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', `attachment; filename="${pdfName5}"`);
+        res.sendFile(pdfPath5, (err) => {
+          if (err) {
+              console.error('Error sending file:', err);
+              res.status(500).send('Error sending file.');
+          }
+      });
+        break;
+    
+  }
+  
+
+  // Send the PDF file
+ 
+});
 
 
 

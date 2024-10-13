@@ -2,9 +2,9 @@
 <!-- <h1>Home</h1> -->
 <div >
   <hr>
-  <p><%= inner %></p>
+  <p class="tagline"><%= inner %></p>
   <hr>
-    <h2> Article's Section </h2></div>
+    <h4> Article's Section </h4></div>
     
 <div class="container">
     
@@ -15,7 +15,7 @@
       <li><a href="/posts/<%=data.title %>"><h1> <%= data.title.split("-").join(" ") %></h1></a>
         <img class="Homeimg" src="<%=data.Imgtext %>" alt="<%= data.title %>"/> 
 
-        <p><%=data.body.substring(0,100) +" ..." %> <a href="/posts/<%=data.title %>">Read more</a></p>
+        <p><%-data.body.substring(0,90) +" ..." %> <a href="/posts/<%=data.title %>">Read more</a></p>
         <label> <%= data.updated.toString().substring(0,15) %></label>
       
       </li> 

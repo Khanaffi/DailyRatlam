@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= t1 %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007bff;
+        }
+        .btn-buy {
+            background-color: #28a745;
+            color: white;
+           
+        }
+        .btn-hm {
+          background-color: red;
+            color: white;
+
+        }
+        .btns{
+          display: flex;
+            justify-content: center; /* Center buttons horizontally */
+            gap: 20px; /* Space between buttons */
+            margin-top: 20px; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+  
+    <h1><%= t1.split("-").join(" ") %></h1>
+    <hr>
+    <div class="btns">
+    <button id="pay-button" class="btn btn-buy">खरीदें अब</button> <a href="/"><button class="btn btn-hm" > Home </button></a>
+  </div>
+<hr>
+    <div class="promotion">
+      <p><strong>1. आत्मविश्वास के साथ तैयारी करें:</strong> हमारे समग्र MP बोर्ड  प्रैक्टिस पेपर 2024 और 2025 सभी प्रमुख विषयों को कवर करते हैं, यह सुनिश्चित करते हुए कि आप अपनी परीक्षाओं के लिए पूरी तरह से तैयार हैं!</p>
+  </div>
+
+  <div class="promotion">
+      <p><strong>2. सभी छात्रों के लिए द्विभाषी समर्थन:</strong> हमारे meticulously crafted प्रैक्टिस पेपर हिंदी और अंग्रेजी दोनों में उपलब्ध हैं, सभी छात्रों की विविध आवश्यकताओं को पूरा करते हैं।</p>
+  </div>
+
+  <div class="promotion">
+      <p><strong>3. अपनी सफलता का अनलॉक करें:</strong> हमारे विशेषज्ञता से तैयार किए गए पेपर के साथ अपनी शैक्षणिक लक्ष्यों को प्राप्त करें, जिसमें विस्तृत समाधान और व्यावहारिक उदाहरण शामिल हैं, जो आपको उत्कृष्टता की दिशा में ले जाएंगे!</p>
+  </div>
+    
+    <h3>Price: ₹299</h3>
+    
+   
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  document.getElementById('pay-button').onclick = function (e) {
+    e.preventDefault();
+    
+    fetch('/create-order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ amount: 29999 }) // Amount in paise
+    })
+    .then(response => response.json())
+    .then(data => {
+      const options = {
+        key: data.key_id,
+        amount: data.amount,
+        currency: data.currency,
+        name: 'Your Company Name',
+        description: 'Payment for order',
+        order_id: data.id,
+        handler: function (response) {
+         
+          console.log(response); // Log the response from Razorpay
+                    // Assuming your server sends the PDF link as part of the response
+                    const downloadLink = '/payment/success/<%=num %>';
+                    window.location.href = downloadLink; // Redirect to the PDF link
+          // Optionally send the payment details to your server for verification
+        },
+        prefill: {
+          name: 'Customer Name',
+          email: 'customer@example.com',
+        },
+        notes: {
+          address: 'Customer Address',
+        },
+        theme: {
+          color: '#F37254'
+        }
+      };
+
+      const rzp1 = new Razorpay(options);
+      rzp1.open();
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  };
+</script>
