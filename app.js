@@ -348,7 +348,7 @@ app.get('/payment/success/:test', (req, res) => {
       const pdfPath = path.join(__dirname, 'pdfs', pdfName);
     
       // Set headers for the PDF file
-      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Type', 'application/octet-stream');
       res.setHeader('Content-Disposition', `attachment; filename="${pdfName}"`);
       res.sendFile(pdfPath, (err) => {
         if (err) {
@@ -362,7 +362,7 @@ app.get('/payment/success/:test', (req, res) => {
       const pdfPath2 = path.join(__dirname, 'pdfs', pdfName2);
     
       // Set headers for the PDF file
-      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Type', 'application/octet-stream');
       res.setHeader('Content-Disposition', `attachment; filename="${pdfName2}"`);
       res.sendFile(pdfPath2, (err) => {
         if (err) {
@@ -376,7 +376,7 @@ app.get('/payment/success/:test', (req, res) => {
         const pdfPath3 = path.join(__dirname, 'pdfs', pdfName3);
       
         // Set headers for the PDF file
-        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Type', 'application/octet-stream');
         res.setHeader('Content-Disposition', `attachment; filename="${pdfName3}"`);
         res.sendFile(pdfPath3, (err) => {
           if (err) {
@@ -390,7 +390,7 @@ app.get('/payment/success/:test', (req, res) => {
           const pdfPath4 = path.join(__dirname, 'pdfs', pdfName4);
         
           // Set headers for the PDF file
-          res.setHeader('Content-Type', 'application/pdf');
+          res.setHeader('Content-Type', 'application/octet-stream');
           res.setHeader('Content-Disposition', `attachment; filename="${pdfName4}"`);
           res.sendFile(pdfPath4, (err) => {
             if (err) {
@@ -406,7 +406,7 @@ app.get('/payment/success/:test', (req, res) => {
         const pdfPath5 = path.join(__dirname, 'pdfs', pdfName5);
       
         // Set headers for the PDF file
-        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Type', 'application/octet-stream');
         res.setHeader('Content-Disposition', `attachment; filename="${pdfName5}"`);
         res.sendFile(pdfPath5, (err) => {
           if (err) {
