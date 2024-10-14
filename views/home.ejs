@@ -2,17 +2,17 @@
 <!-- <h1>Home</h1> -->
 <div >
   <hr>
-  <p class="tagline"><%= inner %></p>
-  <hr>
-    <h4> Article's Section </h4></div>
+  <h4> Article's Section </h4></div>
+  
+
     
 <div class="container">
     
     <% newpost.forEach(function(data){ %>
 <div class="items">
 
-  <ul>
-      <li><a href="/posts/<%=data.title %>"><h1> <%= data.title.split("-").join(" ") %></h1></a>
+  <ul id="homeul">
+      <li class="homelist"><a href="/posts/<%=data.title %>"><h1 class="homeh1"> <%= data.title.split("-").join(" ") %></h1></a>
         <img class="Homeimg" src="<%=data.Imgtext %>" alt="<%= data.title %>"/> 
 
         <p><%-data.body.substring(0,90) +" ..." %> <a href="/posts/<%=data.title %>">Read more</a></p>
@@ -23,7 +23,7 @@
   </div>
     <% }); %>
 </div>
-<div id="rightside">
+<!-- <div id="rightside">
   <h3> Weather Report</h3>
   <% if (mosam) { %>
     <div class="mosam">
@@ -36,8 +36,8 @@
     <p>Could not fetch weather data. Please try again later.</p>
 <% } %>
 
-</div>
+</div> -->
 
     
-
+<p class="tagline"><%= inner %></p>
 <%- include("partials/footer") -%>
