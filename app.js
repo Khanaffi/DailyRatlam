@@ -12,6 +12,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const axios = require('axios');
 const { title } = require('process');
+const { log } = require('console');
 
 const app = express();
 async function keepAlive() {
@@ -303,14 +304,10 @@ app.get('/payment/:num', async (req, res) => {
         const num=req.params.num
         const content = await renderdata();
     const foundObject = content.find(item => item.L1 === `/payment/${num}`);
-   
-
-
+    console.log(foundObject);
         
   const amount = 29999; // Example amount in paise (₹500)
   const key_id = process.env.RP_LIVE_KEY; // Replace with your actual Razorpay key ID
-  
-
   res.render('payments.ejs', { key_id, amount ,num,t1:foundObject.title,b1:foundObject.body}); // Pass key_id and amount to the EJS template
 });
 app.post('/create-order', async (req, res) => {
@@ -337,19 +334,19 @@ app.post('/create-order', async (req, res) => {
 
 app.get('/payment/success/:test', (req, res) => {
   // Verify the payment here, using Razorpay's verification process.
-       const test=           req.params.test;
+       const test=         parseInt(req.params.test,10);
        console.log(test);
        
   
   // If payment is verified
   switch (test) {
-    case test===1:
-      const pdfName = 'pdfs.rar'; // Change this to the relevant PDF name based on your logic.
-      const pdfPath = path.join(__dirname, 'pdfs', pdfName);
+    case 1:
+      const pdfName1 = 'pdfs.rar'; // Change this to the relevant PDF name based on your logic.
+      const pdfPath = path.join(__dirname, 'pdfs', pdfName1);
     
       // Set headers for the PDF file
       res.setHeader('Content-Type', 'application/octet-stream');
-      res.setHeader('Content-Disposition', `attachment; filename="${pdfName}"`);
+      res.setHeader('Content-Disposition', `attachment; filename="${pdfName1}"`);
       res.sendFile(pdfPath, (err) => {
         if (err) {
             console.error('Error sending file:', err);
@@ -357,12 +354,12 @@ app.get('/payment/success/:test', (req, res) => {
         }
     });
       break;
-      case test===2:
-      const pdfName2 = 'pdfs.rar'; // Change this to the relevant PDF name based on your logic.
+      case 2:
+      const pdfName2 = 'business-24-25.zip'; // Change this to the relevant PDF name based on your logic.
       const pdfPath2 = path.join(__dirname, 'pdfs', pdfName2);
     
       // Set headers for the PDF file
-      res.setHeader('Content-Type', 'application/octet-stream');
+      res.setHeader('Content-Type', 'application/zip');
       res.setHeader('Content-Disposition', `attachment; filename="${pdfName2}"`);
       res.sendFile(pdfPath2, (err) => {
         if (err) {
@@ -371,12 +368,12 @@ app.get('/payment/success/:test', (req, res) => {
         }
     });
       break;
-      case test===3:
-        const pdfName3 = 'pdfs.rar'; // Change this to the relevant PDF name based on your logic.
+      case 3:
+        const pdfName3 = 'accounts24-25.zip'; // Change this to the relevant PDF name based on your logic.
         const pdfPath3 = path.join(__dirname, 'pdfs', pdfName3);
       
         // Set headers for the PDF file
-        res.setHeader('Content-Type', 'application/octet-stream');
+        res.setHeader('Content-Type', 'application/zip');
         res.setHeader('Content-Disposition', `attachment; filename="${pdfName3}"`);
         res.sendFile(pdfPath3, (err) => {
           if (err) {
@@ -385,12 +382,12 @@ app.get('/payment/success/:test', (req, res) => {
           }
       });
         break;
-        case test===4:
-          const pdfName4 = 'pdfs.rar'; // Change this to the relevant PDF name based on your logic.
+        case 4:
+          const pdfName4 = 'physics24-25.zip'; // Change this to the relevant PDF name based on your logic.
           const pdfPath4 = path.join(__dirname, 'pdfs', pdfName4);
         
           // Set headers for the PDF file
-          res.setHeader('Content-Type', 'application/octet-stream');
+          res.setHeader('Content-Type', 'application/zip');
           res.setHeader('Content-Disposition', `attachment; filename="${pdfName4}"`);
           res.sendFile(pdfPath4, (err) => {
             if (err) {
@@ -400,21 +397,8 @@ app.get('/payment/success/:test', (req, res) => {
         });
           break;
   
-    default:
-      case test===5:
-        const pdfName5 = 'pdfs.rar'; // Change this to the relevant PDF name based on your logic.
-        const pdfPath5 = path.join(__dirname, 'pdfs', pdfName5);
-      
-        // Set headers for the PDF file
-        res.setHeader('Content-Type', 'application/octet-stream');
-        res.setHeader('Content-Disposition', `attachment; filename="${pdfName5}"`);
-        res.sendFile(pdfPath5, (err) => {
-          if (err) {
-              console.error('Error sending file:', err);
-              res.status(500).send('Error sending file.');
-          }
-      });
-        break;
+     default:
+      res.status(404).send('oops Something Went Wrong 501 But dont worry if You completed your payment pls provide Screenchot at Dailyratlam0@gmail.com we will send this pdf to your gmail id thank you');
     
   }
   

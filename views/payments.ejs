@@ -41,7 +41,7 @@
 
 <div class="container">
   
-    <h1><%= t1.split("-").join(" ") %></h1>
+    <h1><%=t1? t1.split("-").join(" "): "click to Buy Now" %></h1>
     <hr>
     <div class="btns">
     <button id="pay-button" class="btn btn-buy">खरीदें अब</button> <a href="/"><button class="btn btn-hm" > Home </button></a>
