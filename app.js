@@ -312,7 +312,7 @@ app.get('/payment/:num', async (req, res) => {
 });
 app.post('/create-order', async (req, res) => {
   const options = {
-    amount: 29999, // Amount in smallest currency unit
+    amount: 4999, // Amount in smallest currency unit
     currency: 'INR',
     receipt: 'receipt#1',
     payment_capture: 1 // Auto capture
