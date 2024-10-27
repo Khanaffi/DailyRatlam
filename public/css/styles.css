@@ -87,8 +87,12 @@ div.container{
 }
 .postimg{
     position: relative;
-    left: 15%;
-    width:70%;
+    /* left: 200px; */
+    bottom: 50px;
+    width:200px;
+    float: inline-end;
+    margin-left: 20px;
+    /* margin-bottom: 300px; */
     
 }
 .footer-padding{
@@ -182,6 +186,19 @@ div.container{
   color: blue;
 }
   @media (max-width: 768px) {
+    .postimg {
+      position: relative;
+      top: 0px;
+      /* left: 30%; */
+      right: auto;
+      /* bottom: 50px; */
+      width: 100px;
+      float: none;
+      float: left;
+      margin-left: 0%;
+      margin-right: 20px;
+      /* margin-bottom: 300px; */
+  }
     .homeh1{
       background-color: white;
       color: blue;
